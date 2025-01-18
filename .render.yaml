@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: retro-monster-25
+    env: php
+    buildCommand: "composer install"
+    startCommand: "php artisan serve --host=0.0.0.0 --port=80"
+    envVars:
+      - key: APP_URL
+        value: "https://retro-monster-25-exam.onrender.com"
+    manualDeploy: true
