@@ -1,0 +1,37 @@
+version: "3"
+
+services:
+    app:
+        image: laravel-app
+        build:
+            context: .
+            dockerfile: Dockerfile
+        container_name: laravel-app
+        ports:
+            - "8000:8000"
+        environment:
+            - DB_CONNECTION=mysql
+            - DB_HOST=db
+            - DB_PORT=3306
+            - DB_DATABASE=retro_monster_25
+            - DB_USERNAME=root
+            - DB_PASSWORD=root
+        volumes:
+            - .:/var/www/html
+        networks:
+            - laravel-network
+
+    db:
+        image: mysql:5.7
+        container_name: mysql-db
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: retro_monster_25
+        ports:
+            - "3306:3306"
+        networks:
+            - laravel-network
+
+networks:
+    laravel-network:
+        driver: bridge
